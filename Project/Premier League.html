@@ -19,7 +19,67 @@
 	  <li><a href="Bundesliga.html">Bundesliga</a></li>
     </ul>
 	<h1 style="text-align:center">Premier League Home</h1>
-	<p style = "font-size:32px">Standings</p>
+	 <br>
+	<div class=Search>
+    <label color = "white" for="search">Premier player search:</label>
+    <input type="text" id="searchPlayer" name="search" />
+    <input type="submit" value="Submit" onclick="searchPlayerFunc()" />
+	</div>
+    <br><br>
+    <br><br>
+	
+	<p id="demo"></p>
+	
+	
+	<script>
+	let playerInfo = [];
+
+      function searchPlayerFunc() {
+        console.log("hello");
+        searchInput = document.getElementById("searchPlayer").value;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+            "X-RapidAPI-Key":
+              "2e0ed02540msh029bc5074b67080p111b24jsn4c0bccc080fa",
+          },
+        };
+
+        fetch(
+          `https://api-football-v1.p.rapidapi.com/v3/players?league=39&search=${searchInput}`,
+          options
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            playerInfo.push(response.response[0].player.name);
+            playerInfo.push(response.response[0].player.age);
+            playerInfo.push(response.response[0].player.nationality);
+			playerInfo.push(response.response[0].statistics[0].team.name);
+            playerInfo.push(
+             "<img src = '" + response.response[0].player.photo + "'/>"
+            );
+            console.log(playerInfo);
+
+            msg =
+              "Name: " +
+             response.response[0].player.name +
+              "<br>" +
+              "<img src = '" +
+             response.response[0].player.photo +
+              "'/>" +
+              "<br>Nationality: " +
+             response.response[0].player.nationality +
+              "<br>Age: " +
+              response.response[0].player.age +
+			  "<br>Team: " +
+			  response.response[0].statistics[0].team.name;
+
+            document.getElementById("demo").innerHTML = msg;
+          })
+          .catch((err) => console.error(err));
+      }
+	</script>
 	
 <!--	
     <div id="wg-api-football-standings"
@@ -35,13 +95,9 @@
     type="module"
     src="https://widgets.api-sports.io/football/1.1.8/widget.js">
 </script>
-
 -->
 
     
 
   </body>
 </html>
-
-<!--d7e1726998msh13b8b10d05d38ccp1b1fcajsne421dfb72cfa-->
-<!--api-football-v1.p.rapidapi.com-->
