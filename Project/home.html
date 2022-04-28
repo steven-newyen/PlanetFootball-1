@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Planet Football</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <style>
+    
+  </style>
+  <body class="main" style="background-color: white">
+    <!-- this is the start of content -->
+    <ul class="navbar">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="Premier League.html">Premier League</a></li>
+      <li><a href="La Liga.html">La Liga</a></li>
+      <li><a href="Serie A.html">Serie A</a></li>
+      <li><a href="Ligue 1.html">Ligue 1</a></li>
+      <li><a href="Bundesliga.html">Bundesliga</a></li>
+    </ul>
+    <h1 style="text-align: center; color: black">Welcome to Planet Football</h1>
+    <br>
+    <label color = "white" for="search">Search Club:</label>
+    <input type="text" id="search" name="search" />
+    <input type="submit" value="Submit" onclick="myFunc()" />
+    <br><br>
+
+    <center>
+    <img src="images/unnamed.jpg" alt="Messi" width="300" height="500">
+    <img src="images/neymar.jpg" alt="Neymar" width="300" height="500">
+    <img src="images/ronaldo.jpg" alt="Ronaldo" width="300" height="500">
+    <img src="images/pele.jpg" alt="Pele" width="300" height="500">
+    </center>
+<br><br>
+    
+    <p id="demo"></p>
+
+    <!-- Scores**
+	<div id="wg-api-football-fixtures"
+    data-host="api-football-v1.p.rapidapi.com"
+    data-refresh="60"
+    data-date="2022-04-27"
+    data-league=""
+    data-team=""
+    data-season=""
+    data-last=""
+    data-next=""
+    data-key="d7e1726998msh13b8b10d05d38ccp1b1fcajsne421dfb72cfa"
+    data-theme=""
+    data-show-errors="false"
+    class="api_football_loader">
+</div>
+<script
+    type="module"
+    src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+</script>
+-->
+
+    <!--	<div id="wg-api-football-fixture"
+    data-host="api-football-v1.p.rapidapi.com"
+    data-refresh="60"
+    data-id=""
+    data-key="d7e1726998msh13b8b10d05d38ccp1b1fcajsne421dfb72cfa"
+    data-theme=""
+    data-show-errors="false"
+    class="api_football_loader">
+</div>
+<script
+    type="module"
+    src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+</script>
+ -->
+
+    <script>
+      let teamInfo = [];
+
+      function myFunc() {
+        console.log("hello");
+        searchInput = document.getElementById("search").value;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+            "X-RapidAPI-Key":
+              "ac790266a8msh28702431c8eef9ap1cb279jsnb11d96a8f361",
+          },
+        };
+
+        fetch(
+          `https://api-football-v1.p.rapidapi.com/v3/teams?search=${searchInput}`,
+          options
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            teamInfo.push(response.response[0].team.name);
+            teamInfo.push(response.response[0].team.country);
+            teamInfo.push(response.response[0].team.founded);
+            teamInfo.push(
+              "<img src = '" + response.response[0].team.logo + "'/>"
+            );
+            console.log(teamInfo);
+
+            msg =
+              "Team Name: " +
+              response.response[0].team.name +
+              "<br>" +
+              "<img src = '" +
+              response.response[0].team.logo +
+              "'/>" +
+              "<br>Country: " +
+              response.response[0].team.country +
+              "<br>Founded: " +
+              response.response[0].team.founded;
+
+            document.getElementById("demo").innerHTML = msg;
+          })
+          .catch((err) => console.error(err));
+      }
+
+      /**
+	for (const r of response.response[0].team) {
+			teamInfo.push(r.name)
+			teamInfo.push(r.country)
+			teamInfo.push(r.founded)
+			teamInfo.push("<img src = '" +
+            r.logo +
+            "'/>")
+
+
+	const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
+		'X-RapidAPI-Key': 'ac790266a8msh28702431c8eef9ap1cb279jsnb11d96a8f361'
+	}
+};
+
+fetch('https://api-football-v1.p.rapidapi.com/v3/teams?search=manches', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+
+*/
+    </script>
+  </body>
+</html>
+
+<!--d7e1726998msh13b8b10d05d38ccp1b1fcajsne421dfb72cfa-->
+<!--api-football-v1.p.rapidapi.com-->

@@ -1,0 +1,42 @@
+ul.navbar li {
+    list-style-type: none;
+    display: inline-block;
+  }
+
+  ul.navbar {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 500;
+  }
+
+  ul.navbar li a {
+    display: block;
+    padding: 14px 16px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  ul.navbar li a:hover {
+    background-color: lightblue;
+  }
+
+  .main {
+    padding: 5px;
+    margin-top: 30px;
+  }
+
+  body {
+
+    font-family: 'Courier New', monospace;
+  }
+
+  label {
+
+    color:black;
+  }
